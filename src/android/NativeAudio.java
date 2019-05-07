@@ -64,22 +64,24 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	private PluginResult executePreload(JSONArray data) {
 		String audioID;
 		
-		String fullPath_2;
-		try {
-				String assetPath_2 = data.getString(1);
-
-				Uri uri_2 = Uri.parse(assetPath_2);
-				//Uri uri = new Uri(assetPath_2);
-				fullPath_2 = uri_2.getPath();
-
-		} catch (JSONException e) {
-			//return new PluginResult(Status.ERROR, fullPath);
-			//return new PluginResult(Status.ERROR, e.toString());
-		} catch (IOException e) {
-			//return new PluginResult(Status.ERROR, fullPath);
-			//return new PluginResult(Status.ERROR, e.toString());
-		}		
-
+		// uri  object 
+        Uri uri = null; 
+		String fullPath;
+  
+        try { 
+			
+			String assetPath = data.getString(1);
+            // create a URI 
+            uri = new Uri(assetPath); 
+  
+            // get the  Path 
+           fullPath = uri.getPath();
+        } 
+        // if any error occurs 
+        catch (URISyntaxException e) { 
+            // display the error 
+            return new PluginResult(Status.ERROR, e.toString());
+        } 
 		
 		try {
 			audioID = data.getString(0);
@@ -100,11 +102,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				} else {
 					voices = data.getInt(3);
 				}
-				
+				/*
 				Uri uri = Uri.parse(assetPath);
 				//Uri uri = new Uri(assetPath);
 				String fullPath = uri.getPath();
-				
+				*/
 				//String fullPath = "www/".concat(assetPath);
 
 				Context ctx = cordova.getActivity().getApplicationContext();
@@ -120,11 +122,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
 			}
 		} catch (JSONException e) {
-			return new PluginResult(Status.ERROR, fullPath);
-			//return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, e.toString());
 		} catch (IOException e) {
-			return new PluginResult(Status.ERROR, fullPath);
-			//return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, e.toString());
 		}		
 	}
 	
