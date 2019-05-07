@@ -21,6 +21,7 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.net.Uri;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
