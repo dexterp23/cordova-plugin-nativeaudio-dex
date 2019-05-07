@@ -68,9 +68,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 		try {
 				String assetPath_2 = data.getString(1);
 
-				Uri uri = Uri.parse(assetPath_2);
+				Uri uri_2 = Uri.parse(assetPath_2);
 				//Uri uri = new Uri(assetPath_2);
-				fullPath_2 = uri.getPath();
+				fullPath_2 = uri_2.getPath();
 
 		} catch (JSONException e) {
 			//return new PluginResult(Status.ERROR, fullPath);
@@ -120,10 +120,10 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
 			}
 		} catch (JSONException e) {
-			return new PluginResult(Status.ERROR, fullPath_2);
+			return new PluginResult(Status.ERROR, fullPath);
 			//return new PluginResult(Status.ERROR, e.toString());
 		} catch (IOException e) {
-			return new PluginResult(Status.ERROR, fullPath_2);
+			return new PluginResult(Status.ERROR, fullPath);
 			//return new PluginResult(Status.ERROR, e.toString());
 		}		
 	}
