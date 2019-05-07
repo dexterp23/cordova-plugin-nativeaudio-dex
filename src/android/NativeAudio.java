@@ -21,7 +21,6 @@ import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.net.Uri;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -83,12 +82,8 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				} else {
 					voices = data.getInt(3);
 				}
-				
-				//Uri uri = Uri.parse(assetPath);
-				Uri uri = Uri.parse("file://" + assetPath);
-				String fullPath = uri.getPath();
-				
-				//String fullPath = "www/".concat(assetPath);
+
+				String fullPath = "www/".concat(assetPath);
 
 				Context ctx = cordova.getActivity().getApplicationContext();
 				AssetManager am = ctx.getResources().getAssets();
