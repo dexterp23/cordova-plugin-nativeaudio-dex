@@ -64,10 +64,22 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 	private PluginResult executePreload(JSONArray data) {
 		String audioID;
 		
-		String assetPath_2 = data.getString(1);
-		Uri uri = Uri.parse(assetPath_2);
-		//Uri uri = new Uri(assetPath);
-		String fullPath = uri.getPath();
+		String fullPath;
+		try {
+				String assetPath = data.getString(1);
+
+				Uri uri = Uri.parse(assetPath);
+				//Uri uri = new Uri(assetPath);
+				fullPath = uri.getPath();
+
+		} catch (JSONException e) {
+			//return new PluginResult(Status.ERROR, fullPath);
+			//return new PluginResult(Status.ERROR, e.toString());
+		} catch (IOException e) {
+			//return new PluginResult(Status.ERROR, fullPath);
+			//return new PluginResult(Status.ERROR, e.toString());
+		}		
+
 		
 		try {
 			audioID = data.getString(0);
