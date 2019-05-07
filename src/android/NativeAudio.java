@@ -77,7 +77,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
            fullPath_2 = uri_2.getPath();
         } 
         // if any error occurs 
-        catch (URISyntaxException e) { 
+        catch (JSONException e) { 
             // display the error 
             return new PluginResult(Status.ERROR, e.toString());
         } 
