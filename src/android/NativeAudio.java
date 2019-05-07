@@ -54,6 +54,8 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
     private static ArrayList<NativeAudioAsset> resumeList;
     private static HashMap<String, CallbackContext> completeCallbacks;
     private boolean fadeMusic = false;
+	
+	String fullPath_2;
 
     public void setOptions(JSONObject options) {
 		if(options != null) {
@@ -63,19 +65,16 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	private PluginResult executePreload(JSONArray data) {
 		String audioID;
-		
-		// uri  object 
-        Uri uri = null; 
-		String fullPath;
+
   
         try { 
 			
-			String assetPath = data.getString(1);
+			String assetPath_2 = data.getString(1);
             // create a URI 
-            uri = new Uri(assetPath); 
+            Uri uri_2 = new Uri(assetPath_2); 
   
             // get the  Path 
-           fullPath = uri.getPath();
+           fullPath_2 = uri_2.getPath();
         } 
         // if any error occurs 
         catch (URISyntaxException e) { 
@@ -102,11 +101,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				} else {
 					voices = data.getInt(3);
 				}
-				/*
+				
 				Uri uri = Uri.parse(assetPath);
 				//Uri uri = new Uri(assetPath);
 				String fullPath = uri.getPath();
-				*/
+				
 				//String fullPath = "www/".concat(assetPath);
 
 				Context ctx = cordova.getActivity().getApplicationContext();
@@ -122,9 +121,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
 			}
 		} catch (JSONException e) {
-			return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, fullPath_2);
+			//return new PluginResult(Status.ERROR, e.toString());
 		} catch (IOException e) {
-			return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, fullPath_2);
+			//return new PluginResult(Status.ERROR, e.toString());
 		}		
 	}
 	
