@@ -84,11 +84,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 					voices = data.getInt(3);
 				}
 				
-				String fullPath = assetPath;
-				
 				//Uri uri = Uri.parse(assetPath);
-				//Uri uri = new Uri(assetPath);
-				//String fullPath = uri.getPath();
+				Uri uri = Uri.parse("file://" + assetPath);
+				String fullPath = uri.getPath();
 				
 				//String fullPath = "www/".concat(assetPath);
 
