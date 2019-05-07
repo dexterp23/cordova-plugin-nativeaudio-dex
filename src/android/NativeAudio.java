@@ -63,6 +63,12 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	private PluginResult executePreload(JSONArray data) {
 		String audioID;
+		
+		String assetPath_2 = data.getString(1);
+		Uri uri = Uri.parse(assetPath_2);
+		//Uri uri = new Uri(assetPath);
+		String fullPath = uri.getPath();
+		
 		try {
 			audioID = data.getString(0);
 			if (!assetMap.containsKey(audioID)) {
@@ -82,10 +88,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				} else {
 					voices = data.getInt(3);
 				}
-				
+				/*
 				Uri uri = Uri.parse(assetPath);
 				//Uri uri = new Uri(assetPath);
 				String fullPath = uri.getPath();
+				*/
 				//String fullPath = "www/".concat(assetPath);
 
 				Context ctx = cordova.getActivity().getApplicationContext();
@@ -101,9 +108,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
 			}
 		} catch (JSONException e) {
-			return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, fullPath);
+			//return new PluginResult(Status.ERROR, e.toString());
 		} catch (IOException e) {
-			return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, fullPath);
+			//return new PluginResult(Status.ERROR, e.toString());
 		}		
 	}
 	
