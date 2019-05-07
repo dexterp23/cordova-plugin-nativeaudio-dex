@@ -71,7 +71,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 			
 			String assetPath_2 = data.getString(1);
             // create a URI 
-            Uri uri_2 = new Uri(assetPath_2); 
+            Uri uri_2 = Uri.parse(assetPath_2);
   
             // get the  Path 
            fullPath_2 = uri_2.getPath();
