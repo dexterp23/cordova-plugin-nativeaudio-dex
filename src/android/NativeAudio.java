@@ -54,8 +54,6 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
     private static ArrayList<NativeAudioAsset> resumeList;
     private static HashMap<String, CallbackContext> completeCallbacks;
     private boolean fadeMusic = false;
-	
-	String fullPath_2;
 
     public void setOptions(JSONObject options) {
 		if(options != null) {
@@ -65,22 +63,6 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 
 	private PluginResult executePreload(JSONArray data) {
 		String audioID;
-
-  
-        try { 
-			
-			String assetPath_2 = data.getString(1);
-            // create a URI 
-            Uri uri_2 = Uri.parse(assetPath_2);
-  
-            // get the  Path 
-           fullPath_2 = uri_2.getPath();
-        } 
-        // if any error occurs 
-        catch (JSONException e) { 
-            // display the error 
-            return new PluginResult(Status.ERROR, e.toString());
-        } 
 		
 		try {
 			audioID = data.getString(0);
@@ -102,9 +84,11 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 					voices = data.getInt(3);
 				}
 				
-				Uri uri = Uri.parse(assetPath);
+				String fullPath = assetPath;
+				
+				//Uri uri = Uri.parse(assetPath);
 				//Uri uri = new Uri(assetPath);
-				String fullPath = uri.getPath();
+				//String fullPath = uri.getPath();
 				
 				//String fullPath = "www/".concat(assetPath);
 
@@ -121,11 +105,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				return new PluginResult(Status.ERROR, ERROR_AUDIOID_EXISTS);
 			}
 		} catch (JSONException e) {
-			return new PluginResult(Status.ERROR, fullPath_2);
-			//return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, e.toString());
 		} catch (IOException e) {
-			return new PluginResult(Status.ERROR, fullPath_2);
-			//return new PluginResult(Status.ERROR, e.toString());
+			return new PluginResult(Status.ERROR, e.toString());
 		}		
 	}
 	
